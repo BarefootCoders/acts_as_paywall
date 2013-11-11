@@ -1,5 +1,4 @@
 require 'active_support/core_ext'
-require 'acts_as_paywall/instance_methods'
 
 module ActsAsPaywall
   module Paywall
@@ -24,6 +23,8 @@ module ActsAsPaywall
   end
   require 'acts_as_paywall/engine' unless ::Rails.version < "3.1"
 end
+
+require 'acts_as_paywall/instance_methods'
 
 class ActionController::Base
   include ActsAsPaywall::Paywall

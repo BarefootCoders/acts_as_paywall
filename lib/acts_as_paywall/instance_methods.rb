@@ -1,3 +1,4 @@
+require 'acts_as_paywall'
 module ActsAsPaywall::InstanceMethods
   attr_accessor :permissible_controllers
   attr_accessor :free_views
