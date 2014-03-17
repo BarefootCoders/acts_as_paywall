@@ -1,4 +1,6 @@
 require 'acts_as_paywall'
+require_relative 'crawlers.rb'
+
 module ActsAsPaywall::InstanceMethods
   attr_accessor :permissible_controllers
   attr_accessor :free_views
@@ -33,7 +35,7 @@ module ActsAsPaywall::InstanceMethods
   end
 
   def should_redirect_to_paywall?
-    free_views_used? && !skip_paywall? && !(current_user.present? && current_user.subscribed?)
+    free_views_used? && !is_google? && !skip_paywall? && !(current_user.present? && current_user.subscribed?)
   end
 
   def permissible_controller?
@@ -42,5 +44,9 @@ module ActsAsPaywall::InstanceMethods
 
   def paywall_option(key)
     self.class.paywall_options[key.to_sym]
+  end
+
+  def is_google?
+    paywall_option(:crawler_user_agents).include?(request.env['HTTP_USER_AGENT'])
   end
 end
