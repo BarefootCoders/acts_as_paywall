@@ -35,7 +35,10 @@ module ActsAsPaywall::InstanceMethods
   end
 
   def should_redirect_to_paywall?
-    free_views_used? && !is_google? && !skip_paywall? && !(current_user.present? && current_user.subscribed?)
+    free_views_used? &&
+      !is_google? &&
+      !skip_paywall? &&
+      !(user_signed_in? && current_user.subscribed?)
   end
 
   def permissible_controller?
