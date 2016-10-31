@@ -38,7 +38,7 @@ module ActsAsPaywall::InstanceMethods
     free_views_used? &&
       !is_google? &&
       !skip_paywall? &&
-      !(user_signed_in? && current_user.subscribed?)
+      !(user_signed_in? && current_user.paywall_access?)
   end
 
   def permissible_controller?
